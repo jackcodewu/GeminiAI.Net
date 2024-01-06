@@ -1,0 +1,1 @@
+Introducing how C# connects to Gemini AI API
