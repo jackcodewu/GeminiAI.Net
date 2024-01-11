@@ -13,7 +13,7 @@ namespace Gemini
     {
         #region MyRegion
         protected static HttpClient httpClient;
-        protected static string ApiKey = "Your Gemini AI API Key"; 
+        protected static string ApiKey = "AIzaSyC7XxlfaTDcNyQlol06kljtdVV8zDqBNlg"; 
         #endregion
 
         static AIHttpClient()

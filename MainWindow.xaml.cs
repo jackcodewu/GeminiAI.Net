@@ -18,10 +18,10 @@ namespace Gemini
     /// </summary>
     public partial class MainWindow : Window
     {
-        GeminiTextRequest geminiTextRequest=new GeminiTextRequest();
+        GeminiTextRequest geminiTextRequest = new GeminiTextRequest();
         private bool isSave;
         private bool isClose;
-        private string prevInput="";
+        private string prevInput = "";
 
         public MainWindow()
         {
@@ -35,12 +35,12 @@ namespace Gemini
             Height = SystemParameters.WorkArea.Height;
 
             cmBoxTalks.Items.Add("");
-            cmBoxTalks.Items.Add("请您");
-            cmBoxTalks.Items.Add("请问 ");
-            cmBoxTalks.Items.Add("请问在asp.net 7中 ");
-            cmBoxTalks.Items.Add("请问在WPF中 ");
-            cmBoxTalks.Items.Add("接上面的话题，请问 ");
-            cmBoxTalks.Items.Add("请问在abp vnext中 ");
+            cmBoxTalks.Items.Add("Lütfen");
+            cmBoxTalks.Items.Add("Affedersin ");
+            cmBoxTalks.Items.Add("Lütfen bana asp.net 7'de söyleyin ");
+            cmBoxTalks.Items.Add("WPF'de ");
+            cmBoxTalks.Items.Add("Yukarıdaki konunun devamı olarak lütfen sorunuz ");
+            cmBoxTalks.Items.Add("Lütfen bana abp vnext'te söyleyin ");
             cmBoxTalks.SelectedIndex = 0;
 
             panelUser.IsEnabled = true;
@@ -52,7 +52,7 @@ namespace Gemini
         {
             panelUser.IsEnabled = false;
 
-            if (string.IsNullOrWhiteSpace(txtInput.Text) )
+            if (string.IsNullOrWhiteSpace(txtInput.Text))
             {
                 panelUser.IsEnabled = true;
                 return false;
@@ -99,7 +99,8 @@ namespace Gemini
                         Directory.CreateDirectory(dir);
 
                     string path = $"{dir}\\{DateTime.Now.ToString("yyyyMMdd_HHmmss")}_{geminiTextResponse.candidates[0].content.parts[0].text
-                        .Replace("用一句话中文总结这个对话：\n\n*","").Replace("\n","").Replace("*","")}.md";
+            .Replace("Bu konuşmanın özetini lütfen bir Çince cümlede belirtin:\n\n*", "").Replace("\n", "").Replace("*", "")}.md";
+
                     File.WriteAllText(path, txtResult.Text);
 
                     isSave = false;
@@ -151,7 +152,7 @@ namespace Gemini
             {
                 if (!string.IsNullOrWhiteSpace(prevInput))
                 {
-                    txtInput.Text =string.IsNullOrWhiteSpace(cmBoxTalks.Text)? prevInput: prevInput.Replace(cmBoxTalks.Text, "");
+                    txtInput.Text = string.IsNullOrWhiteSpace(cmBoxTalks.Text) ? prevInput : prevInput.Replace(cmBoxTalks.Text, "");
                     txtInput.CaretIndex = txtInput.Text.Length;
                     //await SubmitMsgAsync();
                 }
@@ -209,7 +210,8 @@ namespace Gemini
         {
             if (!string.IsNullOrWhiteSpace(txtResult.Text))
             {
-                var result = MessageBox.Show("是否保存后再退出？选择 是 保存后再退出，选择 否 直接退出。", "提示", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                var result = MessageBox.Show("Çıkış öncesinde kaydetmek ister misiniz? Evet seçeneği ile kaydedip çıkabilir, Hayır seçeneği ile direkt çıkabilirsiniz.", "Uyarı", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+
 
                 if (result == MessageBoxResult.Cancel)
                     e.Cancel = true;
@@ -236,7 +238,8 @@ namespace Gemini
                 //await SubmitMsgAsync();                
                 //isClose = false;
 
-                if (MessageBox.Show("确定要清空吗？", "提示", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                if (MessageBox.Show("Emin misiniz? İptal etmek için İptal'i, devam etmek için Tamam'ı seçin.", "Uyarı", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+
                     txtResult.Text = "";
             }
         }
